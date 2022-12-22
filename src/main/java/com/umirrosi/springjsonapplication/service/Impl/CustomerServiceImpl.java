@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -29,7 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerModel> getAll() {
-        return null;
+        return this.customerRepo.findAll().stream().map(CustomerModel::new)
+                .collect(Collectors.toList());
     }
 
     @Override

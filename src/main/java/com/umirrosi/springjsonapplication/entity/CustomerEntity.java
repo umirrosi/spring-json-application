@@ -77,4 +77,8 @@ public class CustomerEntity {
             addSchool(schoolEntity);
         }
     }
+
+    //public CustomerEntity(CustomerModel model) {
+   //     BeanUtils.copyProperties(model, this);
+    //}
 }

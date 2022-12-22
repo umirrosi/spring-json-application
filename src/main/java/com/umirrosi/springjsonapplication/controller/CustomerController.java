@@ -1,18 +1,35 @@
 package com.umirrosi.springjsonapplication.controller;
 
+import com.umirrosi.springjsonapplication.model.CustomerModel;
 import com.umirrosi.springjsonapplication.model.ResponseModel;
+import com.umirrosi.springjsonapplication.service.CustomerService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
+    private CustomerService service;
+
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> get(){
+        List<CustomerModel> result = service.getAll();
+        return ResponseEntity.ok().body(
+                new ResponseModel(result)
+        );
+    }
+
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody ResponseModel request) {
-        return ResponseEntity.ok().body(request);
+    public ResponseEntity<Object> save(@RequestBody CustomerModel request) {
+        Optional<CustomerModel> result = service.save(request);
+        return ResponseEntity.ok().body(result);
     }
 
 }

@@ -1,8 +1,10 @@
 package com.umirrosi.springjsonapplication.model;
 
+import com.umirrosi.springjsonapplication.entity.CustomerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -29,6 +31,7 @@ public class CustomerModel {
 
     private List<SchoolsModel> schools = new ArrayList<SchoolsModel>();
     private Long schoolsId;
-
-
+    public CustomerModel(CustomerEntity entity) {
+        BeanUtils.copyProperties(entity, this);
+    }
 }
