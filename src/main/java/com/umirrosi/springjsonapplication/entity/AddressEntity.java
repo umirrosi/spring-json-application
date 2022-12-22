@@ -47,7 +47,12 @@ public class AddressEntity {
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private CustomerEntity customerAddress;
 
-    public AddressEntity(AddressModel address)  {
-        BeanUtils.copyProperties(address, this);
+    public AddressEntity(AddressModel model) {
+        this.name = model.getName();
+        this.address = model.getAddress();
+        this.village = model.getVillage();
+        this.district = model.getDistrict();
+        this.province = model.getProvince();
     }
+
 }

@@ -1,5 +1,6 @@
 package com.umirrosi.springjsonapplication.entity;
 
+import com.umirrosi.springjsonapplication.model.SchoolsModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,11 @@ public class SchoolEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private CustomerEntity customerSchool;
+
+    public SchoolEntity(SchoolsModel model) {
+        this.title = model.getTitle();
+        this.name = model.getName();
+        this.level = model.getLevel();
+    }
 
 }

@@ -1,6 +1,8 @@
 package com.umirrosi.springjsonapplication.entity;
 
+import com.umirrosi.springjsonapplication.model.AddressModel;
 import com.umirrosi.springjsonapplication.model.CustomerModel;
+import com.umirrosi.springjsonapplication.model.SchoolsModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -44,9 +47,34 @@ public class CustomerEntity {
     @OneToMany(mappedBy = "customerSchool", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<SchoolEntity> schoolEntities = new HashSet<>();
 
-    public CustomerEntity(CustomerModel customerRequest) {
-        BeanUtils.copyProperties(customerRequest, this);
+    public CustomerEntity(CustomerModel model) {
+        this.fullName = model.getFullName();
+        this.gender = model.getGender();
+        this.dateOfBirth = model.getDateOfBirth();
+        this.placeOfBirth = model.getPlaceOfBirth();
     }
 
+    public void addAddress(AddressEntity address){
+        this.addressEntities.add(address);
+        address.setCustomerAddress(this);
+    }
 
+    public void addAddressList(List<AddressModel> addressModels){
+        for(AddressModel item: addressModels){
+            AddressEntity addressEntity = new AddressEntity(item);
+            addAddress(addressEntity);
+        }
+    }
+
+    public void addSchool(SchoolEntity school){
+        this.schoolEntities.add(school);
+        school.setCustomerSchool(this);
+    }
+
+    public void addSchoolList(List<SchoolsModel> schoolModels){
+        for(SchoolsModel item: schoolModels){
+            SchoolEntity schoolEntity = new SchoolEntity(item);
+            addSchool(schoolEntity);
+        }
+    }
 }

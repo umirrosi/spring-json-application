@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,14 +18,17 @@ import java.util.List;
 public class CustomerModel {
     private Long id;
     private String fullName;
-    private List<AddressModel> address;
     private Long addressId;
+    private List<AddressModel> address = new ArrayList<AddressModel>();
     private String gender;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     private String placeOfBirth;
-    private List<SchoolsModel> schools;
+
+    private List<SchoolsModel> schools = new ArrayList<SchoolsModel>();
     private Long schoolsId;
+
+
 }
