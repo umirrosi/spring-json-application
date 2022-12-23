@@ -4,6 +4,7 @@ import com.umirrosi.springjsonapplication.model.AddressModel;
 import com.umirrosi.springjsonapplication.model.CustomerModel;
 import com.umirrosi.springjsonapplication.model.SchoolsModel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -17,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "customer_req_tab")
 public class CustomerEntity {
@@ -31,6 +33,13 @@ public class CustomerEntity {
     @Column(name = "fullName", length = 100, nullable = false)
     private String fullName;
 
+    /*@Column(name = "address_id")
+    private Long address_id;*/
+
+    /*@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", insertable = false, updatable = false)
+    private AddressEntity address;*/
+
     @Column(name = "gender", length = 15, nullable = false)
     private String gender;
 
@@ -40,6 +49,14 @@ public class CustomerEntity {
 
     @Column(name = "place_of_birth")
     private String placeOfBirth;
+
+
+    /*@Column(name = "school_id")
+    private Long school_id;*/
+
+    /*@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "school_id", insertable = false, updatable = false)
+    private SchoolEntity school;*/
 
     @OneToMany(mappedBy = "customerAddress", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AddressEntity> addressEntities = new HashSet<>();
@@ -54,7 +71,7 @@ public class CustomerEntity {
         this.placeOfBirth = model.getPlaceOfBirth();
     }
 
-    public void addAddress(AddressEntity address){
+    /*public void addAddress(AddressEntity address){
         this.addressEntities.add(address);
         address.setCustomerAddress(this);
     }
@@ -77,8 +94,7 @@ public class CustomerEntity {
             addSchool(schoolEntity);
         }
     }
-
     //public CustomerEntity(CustomerModel model) {
-   //     BeanUtils.copyProperties(model, this);
-    //}
+    //    BeanUtils.copyProperties(model, this);
+    //}*/
 }

@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ResponseModel {
-    private List<CustomerModel> dataCustomer;
-    private Integer successSave;
-    private Integer failedSave;
+@NoArgsConstructor
+public class CustomerRequest {
+    private List<CustomerModel> customers;
+    //private List<AddressModel> address;
+    //private List<SchoolsModel> schools;
 }

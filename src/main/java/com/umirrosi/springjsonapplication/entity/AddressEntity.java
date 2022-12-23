@@ -2,15 +2,19 @@ package com.umirrosi.springjsonapplication.entity;
 
 import com.umirrosi.springjsonapplication.model.AddressModel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "address_tab")
 public class AddressEntity {
@@ -46,6 +50,9 @@ public class AddressEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
     private CustomerEntity customerAddress;
+
+    /*@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AddressEntity> addressEntities = new HashSet<>();*/
 
     public AddressEntity(AddressModel model) {
         this.name = model.getName();

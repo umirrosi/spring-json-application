@@ -20,17 +20,17 @@ import java.util.List;
 public class CustomerModel {
     private Long id;
     private String fullName;
-    private Long addressId;
-    private List<AddressModel> address = new ArrayList<AddressModel>();
     private String gender;
+    //private Long addressId;
+    private List<AddressModel> address;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     private String placeOfBirth;
 
-    private List<SchoolsModel> schools = new ArrayList<SchoolsModel>();
-    private Long schoolsId;
+    private List<SchoolsModel> schools;
+    //private Long schoolsId;
     public CustomerModel(CustomerEntity entity) {
         BeanUtils.copyProperties(entity, this);
     }
